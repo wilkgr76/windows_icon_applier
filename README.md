@@ -1,1 +1,2 @@
-# windows_icon_applier
+# Windows icon applier
+This is an experiment, written in SmallBasic. It is **not** production ready. I hope to rewrite it later in a different language, as SmallBasic is generally only good for prototyping.
