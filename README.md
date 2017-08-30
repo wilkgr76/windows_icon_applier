@@ -1,2 +1,16 @@
+# Currently **not** works as it should. This is in **alpha**.
+
 # Windows icon applier
-This is an experiment, written in SmallBasic. It is **not** production ready. I hope to rewrite it later in a different language, as SmallBasic is generally only good for prototyping.
+
+## Warning
+This is an experiment, written using PowerShell. It is **not** production ready.
+
+## TODO
+* Add GUI. Python w/ Tkinter or Electron?
+
+## The two files
+`test_backup.ps1` is one that I KNOW works, but `test.ps1` currently does **not** work.
+
+
+## The old/ folder
+The old/ folder contains the old SmallBasic code. This is only for reference, and shouldn't be used.
