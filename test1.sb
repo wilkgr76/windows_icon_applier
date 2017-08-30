@@ -1,0 +1,123 @@
+newLine = Text.GetCharacter(010)
+' Get shortcuts
+shortcuts = File.GetFiles("C:\ProgramData\Microsoft\Windows\Start Menu\Programs")
+shortcuts2 = File.GetFiles(LDFile.AppDataFolder + "\Microsoft\Windows\Start Menu\Programs")
+
+folders = File.GetDirectories(LDFile.AppDataFolder + "\Microsoft\Windows\Start Menu\Programs")
+folders = LDFile.GetAllDirectories(LDFile.AppDataFolder + "\Microsoft\Windows\Start Menu\Programs")
+
+For i=1 To Array.GetItemCount(folders)
+  folders1[i] = LDFile.GetFolder(folders[i]) + "\" + File.GetFiles(folders[i])
+  TextWindow.WriteLine(folders[i])
+EndFor
+
+'shortcuts = shortcuts + folders1
+
+' Folder to put shortcuts
+output_folder = "D:\materialos\new_shortcuts\"
+' Location where icons are stored
+icons = "D:\materialos\icons\"
+
+GraphicsWindow.BrushColor = "Black"
+GraphicsWindow.FontBold = "False"
+GraphicsWindow.CanResize = "False"
+GraphicsWindow.Title = "Apply MaterialOS"
+
+applyButton = Controls.AddButton("Apply!",0,0)
+Controls.SetSize(applyButton,GraphicsWindow.Width,25)
+Controls.ButtonClicked = ApplyIcons
+
+feedback = Controls.AddMultiLineTextBox(0,25)
+Controls.SetSize(feedback,GraphicsWindow.Width,GraphicsWindow.Height-25)
+
+counter = 0
+
+Sub ApplyIcons
+  For i = 1 To Array.GetItemCount(shortcuts)
+    'TextWindow.WriteLine(shortcuts[i])
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(shortcuts[i],"Icon"))
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(shortcuts[i],"Target"))
+    'TextWindow.WriteLine(LDShell.ShellLinkGet(shortcuts[i],"Icon"))
+    
+    oldlog = Controls.GetTextBoxText(feedback)
+    
+    Target = LDShell.ShellLinkGet(shortcuts[i],"Target")
+    Args = LDShell.ShellLinkGet(shortcuts[i],"Args")
+    Folder = LDShell.ShellLinkGet(shortcuts[i],"Folder")
+    Desc = LDShell.ShellLinkGet(shortcuts[i],"Desc")
+    Hotkey = LDShell.ShellLinkGet(shortcuts[i],"HotKey")
+    Style = LDShell.ShellLinkGet(shortcuts[i],"Style")
+    
+    If LDFile.Exists(icons + LDFile.GetFile(Target) + ".ico") Then
+      Icon = icons + LDFile.GetFile(Target) + ".ico"
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Applied icon for " + LDFile.GetFile(shortcuts[i]))
+    Else
+      Icon = LDShell.ShellLinkGet(shortcuts[i],"Icon")
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Keeping default icon for " + LDFile.GetFile(shortcuts[i]))
+    EndIf
+
+    'TextWindow.WriteLine(output_folder + LDFile.GetFile(shortcuts[i]) + ".lnk")
+    LDShell.ShellLink(output_folder + LDFile.GetFile(shortcuts[i]) + ".lnk",Target)
+    LDShell.ShellLinkSet(output_folder + LDFile.GetFile(shortcuts[i]) + ".lnk",Target,Args,Folder,Desc,Icon,Hotkey,Style)
+    counter = counter + 1
+  EndFor
+  For i = 1 To Array.GetItemCount(shortcuts2)
+    'TextWindow.WriteLine(shortcuts2[i])
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(shortcuts2[i],"Icon"))
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(shortcuts2[i],"Target"))
+    'TextWindow.WriteLine(LDShell.ShellLinkGet(shortcuts2[i],"Icon"))
+    
+    oldlog = Controls.GetTextBoxText(feedback)
+    
+    Target = LDShell.ShellLinkGet(shortcuts2[i],"Target")
+    Args = LDShell.ShellLinkGet(shortcuts2[i],"Args")
+    Folder = LDShell.ShellLinkGet(shortcuts2[i],"Folder")
+    Desc = LDShell.ShellLinkGet(shortcuts2[i],"Desc")
+    Hotkey = LDShell.ShellLinkGet(shortcuts2[i],"HotKey")
+    Style = LDShell.ShellLinkGet(shortcuts2[i],"Style")
+    
+    If LDFile.Exists(icons + LDFile.GetFile(Target) + ".ico") Then
+      Icon = icons + LDFile.GetFile(Target) + ".ico"
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Applied icon for " + LDFile.GetFile(shortcuts2[i]))
+    Else
+      Icon = LDShell.ShellLinkGet(shortcuts2[i],"Icon")
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Keeping default icon for " + LDFile.GetFile(shortcuts2[i]))
+    EndIf
+
+    'TextWindow.WriteLine(output_folder + LDFile.GetFile(shortcuts2[i]) + ".lnk")
+    LDShell.ShellLink(output_folder + LDFile.GetFile(shortcuts2[i]) + ".lnk",Target)
+    LDShell.ShellLinkSet(output_folder + LDFile.GetFile(shortcuts2[i]) + ".lnk",Target,Args,Folder,Desc,Icon,Hotkey,Style)
+    counter = counter + 1
+  EndFor
+  For i = 1 To Array.GetItemCount(folders1)
+    'TextWindow.WriteLine(folders1[i])
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(folders1[i],"Icon"))
+    'TextWindow.WriteLine(LDShell.LinkGetProperty(folders1[i],"Target"))
+    'TextWindow.WriteLine(LDShell.ShellLinkGet(folders1[i],"Icon"))
+    
+    oldlog = Controls.GetTextBoxText(feedback)
+    
+    Target = LDShell.ShellLinkGet(folders1[i],"Target")
+    Args = LDShell.ShellLinkGet(folders1[i],"Args")
+    Folder = LDShell.ShellLinkGet(folders1[i],"Folder")
+    Desc = LDShell.ShellLinkGet(folders1[i],"Desc")
+    Hotkey = LDShell.ShellLinkGet(folders1[i],"HotKey")
+    Style = LDShell.ShellLinkGet(folders1[i],"Style")
+    
+    If LDFile.Exists(icons + LDFile.GetFile(Target) + ".ico") Then
+      Icon = icons + LDFile.GetFile(Target) + ".ico"
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Applied icon for " + LDFile.GetFile(folders1[i]))
+    Else
+      Icon = LDShell.ShellLinkGet(folders1[i],"Icon")
+      Controls.SetTextBoxText(feedback, oldlog + newLine + "Keeping default icon for " + LDFile.GetFile(folders1[i]))
+    EndIf
+
+    'TextWindow.WriteLine(output_folder + LDFile.GetFile(folders1[i]) + ".lnk")
+    LDShell.ShellLink(output_folder + LDFile.GetFile(folders1[i]) + ".lnk",Target)
+    LDShell.ShellLinkSet(output_folder + LDFile.GetFile(folders1[i]) + ".lnk",Target,Args,Folder,Desc,Icon,Hotkey,Style)
+    counter = counter + 1
+  EndFor
+  Controls.SetTextBoxText(feedback,oldlog + newLine + "Finished (" + counter + ") objects")
+EndSub
+  
+Controls.SetTextBoxText(feedback, "Click 'apply' to start!")
