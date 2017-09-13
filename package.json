@@ -1,0 +1,27 @@
+{
+  "name": "windowsiconapplier",
+  "version": "0.1.0",
+  "description": "Apply icon packs easily to start menu icons.",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wilkgr76/WindowIconApplier.git"
+  },
+  "author": "wilkgr",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/wilkgr76/WindowIconApplier/issues"
+  },
+  "homepage": "https://github.com/wilkgr76/WindowIconApplier#readme",
+  "dependencies": {
+    "decompress-zip": "^0.3.0",
+    "electron": "^1.7.6",
+    "glob": "^7.1.2",
+    "rimraf": "^2.6.1",
+    "walk": "^2.3.9",
+    "windows-shortcuts": "^0.1.5"
+  }
+}
