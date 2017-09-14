@@ -6,12 +6,12 @@ var glob = require("glob")
 // var walk = require('walk');
 var ws = require('windows-shortcuts');
 
-// console.log = function(input) {
-//   console.warn(input)
-//   document.getElementById("log").value += input + "\n"
-//   var textarea = document.getElementById('log');
-//   textarea.scrollTop = textarea.scrollHeight;
-// }
+console.log = function(input) {
+  console.warn(input)
+  document.getElementById("log").value += input + "\n"
+  var textarea = document.getElementById('log');
+  textarea.scrollTop = textarea.scrollHeight;
+}
 
 const dir_root = `${__dirname}\\..`
 
@@ -50,10 +50,10 @@ function applyPack(ZIPfile) {
     glob(gpath, function (er, files) {
       console.log("Glob!")
       if(er) {
-        console.log(er)
+        alert(er)
       }
       if(files) {
-        console.log(files);
+        parseFiles(files);
       }
     })
   });
@@ -82,8 +82,8 @@ function applyPack(ZIPfile) {
 
 function parseFiles(files) {
   for(i=0;i<files.length;i++) {
-    console.warn(files[i])
-    // ws.query(files[i],console.warn)
+    console.log(files[i])
+    // ws.query(files[i],console.log)
   }
 }
 
